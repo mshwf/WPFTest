@@ -1,0 +1,34 @@
+﻿<Window x:Class="WPFTest.WndClaculatorButton"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFTest"
+        mc:Ignorable="d"
+        Title="WndClaculatorButton" Height="300" Width="300">
+    <Grid Background="Gray">
+        <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Width="80" Height="40">
+            <Rectangle Fill="Black"/>
+            <Rectangle Width="78" Height="38">
+                <Rectangle.Fill>
+                    <LinearGradientBrush EndPoint="0.5,0.4" StartPoint="0.333,0.686">
+                        <GradientStopCollection>
+                            <GradientStop Offset="0" Color="#DDDDDD"/>
+                            <GradientStop Offset="0" Color="Black"/>
+                        </GradientStopCollection>
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+            <Rectangle Width="76" Height="36">
+                <Rectangle.Fill>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0.5,01">
+                        <GradientStopCollection>
+                            <GradientStop Offset="0" Color="Black"/>
+                            <GradientStop Offset="1" Color="Gray"/>
+                        </GradientStopCollection>
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+        </Grid>
+    </Grid>
+</Window>

@@ -1,0 +1,34 @@
+﻿<Window x:Class="WPFTest.StartWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFTest"
+        mc:Ignorable="d"
+        Title="StartWindow" Height="480" Width="300" Background="White">
+    <ScrollViewer>
+        <StackPanel>
+
+            <StackPanel.Resources>
+                <Style TargetType="Button">
+                    <Setter Property="Margin" Value="2"/>
+                </Style>
+            </StackPanel.Resources>
+            <Button Name="AnimatedButton_window" ToolTip="{Binding Path=Name}" Click="AnimatedButton_window_Click">Animations &amp; Gradinet</Button>
+            <Button ToolTip="Hello" Name="MainWindow" Click="MainWindow_Click">Dependency properties</Button>
+            <Button Name="Window1" Click="Window1_Click">Opacity Mask</Button>
+            <Button Name="Window2" Click="Window2_Click">Visuals and Drawings</Button>
+            <Button Name="Borders_KeyFrames" Click="Borders_KeyFrames_Click">Key Frames</Button>
+            <Button Name="Wnd_Styles" Click="Wnd_Styles_Click">Styles</Button>
+            <Button Name="WndCustomTemplateControls" Click="WndCustomTemplateControls_Click">Styles</Button>
+            <Button Name="WndDataContext" Click="WndDataContext_Click">DataContext</Button>
+            <Button Name="FrmDataContextChanged" Click="FrmDataContextChanged_Click">DataContext Changed</Button>
+            <Button Name="FrmMVLocator" Click="FrmMVLocator_Click">MVVM locator</Button>
+            <Button Name="FrmLisBox" Click="FrmLisBox_Click">ListBox DataTemplate</Button>
+            <Button Name="FrmDP" Click="FrmDP_Click">DP</Button>
+            <Button Name="PwdWindo" Click="PwdWindo_Click">PassswordBox</Button>
+            <Button Name="wndBehavior" Click="wndBehavior_Click">Text behavior</Button>
+            <Button Name="wndAnimate" Click="wndAnimate_Click">Animate</Button>
+        </StackPanel>
+    </ScrollViewer>
+</Window>

@@ -1,0 +1,14 @@
+﻿<UserControl x:Class="WPFTest.MyBtn"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WPFTest"
+             mc:Ignorable="d" d:DesignWidth="300" Background="#33ddaa" Width="100" Height="50">
+    <UserControl.DataContext>
+        <local:VModel Id="4" Title="HelloMVVM"/>
+    </UserControl.DataContext>
+    <Grid VerticalAlignment="Center" >
+        <Button Background="#aaa93a" Foreground="Wheat" BorderBrush="Gray" BorderThickness="1" Width="70" Height="30" VerticalAlignment="Bottom" Click="Button_Click">Click me</Button>
+    </Grid>
+</UserControl>
