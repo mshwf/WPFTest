@@ -9,7 +9,7 @@ using System.Windows.Controls.Primitives;
 
 namespace WpfTests
 {
-    public class MagicalButton : ToggleButton
+    public class MagicalButton : ContentControl
     {
 
         public string SubTitle

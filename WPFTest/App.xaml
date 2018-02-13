@@ -336,6 +336,7 @@ Fill="{StaticResource MyGlassBrushResource}" RenderTransformOrigin="0.5,0.5">
             <Setter Property="IsTabStop" Value="false" />
             <Setter Property="Focusable" Value="false" />
             <Setter Property="Width" Value="8" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Thumb}">
@@ -367,8 +368,8 @@ Fill="{StaticResource MyGlassBrushResource}" RenderTransformOrigin="0.5,0.5">
                     </Border.Background>
                 </Border>
 
-                <Track x:Name="PART_Track"
-           Grid.Row="0" Grid.RowSpan="3"
+                <Track x:Name="PART_Track" HorizontalAlignment="Center"
+           Grid.Row="0" Grid.RowSpan="3" Margin="0,0"
            IsDirectionReversed="true">
                     <Track.DecreaseRepeatButton>
                         <RepeatButton Style="{StaticResource ScrollBarPageButton}"
@@ -380,8 +381,9 @@ Fill="{StaticResource MyGlassBrushResource}" RenderTransformOrigin="0.5,0.5">
                             <Thumb.BorderBrush>
 
                                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
-                                    <GradientStop Color="White" Offset="0.0"/>
-                                    <GradientStop Color="Black" Offset="1.0"/>
+                                    <GradientStop Color="Gray" Offset="0.0"/>
+                                    <GradientStop Color="Black" Offset="0.5"/>
+                                    <GradientStop Color="Gray" Offset="1.0"/>
                                 </LinearGradientBrush>
                             </Thumb.BorderBrush>
 
@@ -475,13 +477,11 @@ Fill="{StaticResource MyGlassBrushResource}" RenderTransformOrigin="0.5,0.5">
         </ControlTemplate>
 
 
-        <Style x:Key="{x:Type ScrollBar}"
-       TargetType="{x:Type ScrollBar}">
-            <Setter Property="SnapsToDevicePixels"
-          Value="True" />
+        <Style x:Key="{x:Type ScrollBar}" TargetType="{x:Type ScrollBar}">
+            <Setter Property="SnapsToDevicePixels" Value="True" />
             <Setter Property="SmallChange" Value="20"/>
-            <Setter Property="OverridesDefaultStyle"
-          Value="true" />
+            <Setter Property="OverridesDefaultStyle" Value="true" />
+            <Setter Property="Margin" Value="-3,3" />
             <Style.Triggers>
                 <Trigger Property="Orientation" Value="Horizontal">
                     <Setter Property="Width" Value="Auto" />

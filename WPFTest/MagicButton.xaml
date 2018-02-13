@@ -59,14 +59,10 @@
         </LinearGradientBrush>
 
         <LinearGradientBrush x:Key="ProgressBarIndicatorAnimatedFill" StartPoint="0,0" EndPoint="1,0">
-            <LinearGradientBrush.GradientStops>
-                <GradientStopCollection>
-                    <GradientStop Color="#000000FF" Offset="0" />
-                    <GradientStop Color="#600000FF" Offset="0.4" />
-                    <GradientStop Color="#600000FF" Offset="0.6" />
-                    <GradientStop Color="#000000FF" Offset="1" />
-                </GradientStopCollection>
-            </LinearGradientBrush.GradientStops>
+            <GradientStop Color="#000000FF" Offset="0" />
+            <GradientStop Color="#600000FF" Offset="0.4" />
+            <GradientStop Color="#600000FF" Offset="0.6" />
+            <GradientStop Color="#000000FF" Offset="1" />
         </LinearGradientBrush>
         <Style x:Key="btnStyle" TargetType="{x:Type Button}">
             <Setter Property="Template">
@@ -76,11 +72,9 @@
                             <Border BorderBrush="#97CDFF" BorderThickness="1" CornerRadius="20" Padding="0,20,40,0" ClipToBounds="True">
                                 <Border.Background>
                                     <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
-                                        <GradientStopCollection>
-                                            <GradientStop Offset="-0.5" Color="Transparent" x:Name="stop1"/>
-                                            <GradientStop Offset="0.5" Color="#97CDFF"/>
-                                            <GradientStop Offset="1.5" Color="Transparent" x:Name="stop2"/>
-                                        </GradientStopCollection>
+                                        <GradientStop Offset="-0.5" Color="Transparent" x:Name="stop1"/>
+                                        <GradientStop Offset="0.5" Color="#97CDFF"/>
+                                        <GradientStop Offset="1.5" Color="Transparent" x:Name="stop2"/>
                                     </LinearGradientBrush>
                                 </Border.Background>
                             </Border>
@@ -150,17 +144,15 @@
             </Setter>
         </Style>
         <LinearGradientBrush x:Key="btn3d" StartPoint="0.5,0" EndPoint="0.5,1">
-            <GradientStopCollection>
-                <GradientStop Offset="0" Color="Gray"/>
-                <GradientStop Offset="1" Color="Black"/>
-            </GradientStopCollection>
+            <GradientStop Offset="0" Color="Gray"/>
+            <GradientStop Offset="1" Color="Black"/>
         </LinearGradientBrush>
 
-        <Style TargetType="{x:Type ToggleButton}" x:Key="newBtn">
+        <Style TargetType="{x:Type ContentControl}" x:Key="mgcBtn">
             <Setter Property="Padding" Value="30,10"/>
             <Setter Property="Template">
                 <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type ToggleButton}" x:Name="cont">
+                    <ControlTemplate TargetType="{x:Type ContentControl}" x:Name="cont">
                         <Grid Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto"/>
@@ -173,25 +165,107 @@
                                         <ColumnDefinition Width="1"/>
                                         <ColumnDefinition Width="2*"/>
                                     </Grid.ColumnDefinitions>
-                                    <Polygon Grid.Column="0" Points="12,12 12,26, 22,19" Fill="#4B86B1" Margin="0,0,5,0" RenderTransformOrigin="0.6,0.5">
-                                        <Polygon.RenderTransform>
-                                            <RotateTransform x:Name="rotRect" Angle="0"/>
-                                        </Polygon.RenderTransform>
-                                        <Polygon.Effect>
-                                            <DropShadowEffect ShadowDepth="0.5" Direction="0" Color="Black"  Opacity="1" BlurRadius="1"/>
-                                        </Polygon.Effect>
-                                    </Polygon>
+                                    <ToggleButton Padding="30, 10">
+                                        <ToggleButton.Template>
+                                            <ControlTemplate TargetType="ToggleButton">
+                                                <Border Background="Transparent" >
+                                                    <Border.RenderTransform>
+                                                        <RotateTransform x:Name="rotRect" Angle="0"/>
+                                                    </Border.RenderTransform>
+                                                    <!--<Polygon Points="12,12 12,26, 22,19" Fill="#4B86B1" Margin="0,0,5,0" >
+                                                        <Polygon.RenderTransform>
+                                                            <RotateTransform x:Name="rotRect2" Angle="0" CenterX="17" CenterY="19"/>
+                                                        </Polygon.RenderTransform>
+                                                        <Polygon.Effect>
+                                                            <DropShadowEffect ShadowDepth="0.5" Direction="0" Color="Black"  Opacity="1" BlurRadius="1"/>
+                                                        </Polygon.Effect>
+                                                    </Polygon>-->
+
+                                                    <Polygon Points="12,12 12,26, 22,19" Fill="#4B86B1" RenderTransformOrigin="0.75,0.75"
+                                                             HorizontalAlignment="Left" VerticalAlignment="Top">
+                                                        <Polygon.RenderTransform>
+                                                            <RotateTransform x:Name="rotRect2" Angle="0" />
+                                                        </Polygon.RenderTransform>
+                                                        <Polygon.Effect>
+                                                            <DropShadowEffect ShadowDepth="0.5" Direction="0" Color="Black" Opacity="1" BlurRadius="1"/>
+                                                        </Polygon.Effect>
+                                                    </Polygon>
+                                                </Border>
+                                                <ControlTemplate.Triggers>
+                                                    <EventTrigger RoutedEvent="ToggleButton.Checked">
+                                                        <BeginStoryboard>
+                                                            <Storyboard>
+                                                                <DoubleAnimation Storyboard.TargetName="rotRect2" Storyboard.TargetProperty="Angle" From="0" To="90" Duration="0:0:0.5"/>
+                                                                <!--<DoubleAnimation Storyboard.TargetName="lstBx" Storyboard.TargetProperty="Height" From="0" To="60" Duration="0:0:0.5"/>-->
+                                                            </Storyboard>
+                                                        </BeginStoryboard>
+                                                    </EventTrigger>
+                                                    <EventTrigger RoutedEvent="ToggleButton.Unchecked">
+                                                        <BeginStoryboard>
+                                                            <Storyboard>
+                                                                <DoubleAnimation Storyboard.TargetName="rotRect2" Storyboard.TargetProperty="Angle" From="90" To="0" Duration="0:0:0.5"/>
+                                                                <!--<DoubleAnimation Storyboard.Target="{Binding ElementName=lstBx, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBox}}}" Storyboard.TargetProperty="Height" From="0" To="60" Duration="0:0:0.5"/>-->
+                                                            </Storyboard>
+                                                        </BeginStoryboard>
+                                                    </EventTrigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </ToggleButton.Template>
+                                        <!--<ToggleButton.Triggers>
+                                            <EventTrigger RoutedEvent="ToggleButton.Checked">
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation Storyboard.TargetName="rotRect" Storyboard.TargetProperty="Angle" From="0" To="90" Duration="0:0:0.5"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+                                            <EventTrigger RoutedEvent="ToggleButton.Unchecked">
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation Storyboard.TargetName="rotRect" Storyboard.TargetProperty="Angle" From="0" To="90" Duration="0:0:0.5"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+
+                                            -->
+                                        <!--<Trigger Property="ToggleButton.IsChecked" Value="true">
+                                                <Trigger.EnterActions>
+                                                    <BeginStoryboard>
+                                                        <Storyboard>
+                                                            <DoubleAnimation Storyboard.TargetName="rotRect" Storyboard.TargetProperty="Angle" From="0" To="90" Duration="0:0:0.5"/>
+                                                            
+                                        <DoubleAnimation Storyboard.Target="{Binding ElementName=lstBx, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBox}}}" Storyboard.TargetProperty="Height" From="0" To="60" Duration="0:0:0.5"/>
+                                        
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </Trigger.EnterActions>
+                                                <Trigger.ExitActions>
+                                                    <BeginStoryboard>
+                                                        <Storyboard>
+                                                            <DoubleAnimation Storyboard.TargetName="rotRect" Storyboard.TargetProperty="Angle" From="90" To="0" Duration="0:0:0.5"/>
+                                                            -->
+                                        <!--<DoubleAnimation Storyboard.Target="{Binding ElementName=lstBx, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBox}}}" Storyboard.TargetProperty="Height" From="60" To="0" Duration="0:0:0.5"/>-->
+                                        <!--
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </Trigger.ExitActions>
+                                            </Trigger>-->
+                                        <!--<Trigger Property="IsMouseOver" Value="true">
+                                                <Setter Property="Cursor" Value="Hand"/>
+                                            </Trigger>-->
+                                        <!--
+                                        </ToggleButton.Triggers>-->
+                                    </ToggleButton>
+
                                     <Rectangle Grid.Column="1">
                                         <Rectangle.Fill>
                                             <LinearGradientBrush StartPoint="0.25,0" EndPoint="1,1">
-                                                <GradientStopCollection>
-                                                    <GradientStop Offset="1" Color="Gray"/>
-                                                    <GradientStop Offset="0" Color="Black"/>
-                                                </GradientStopCollection>
+                                                <GradientStop Offset="1" Color="Gray"/>
+                                                <GradientStop Offset="0" Color="Black"/>
                                             </LinearGradientBrush>
                                         </Rectangle.Fill>
                                     </Rectangle>
-                                    <StackPanel Grid.Column="2" Margin="5,0,5,5">
+                                    <StackPanel Grid.Column="2" Margin="5,0,5,5" >
                                         <Grid Margin="0,7,0,0">
                                             <ContentPresenter HorizontalAlignment="Center" Margin="0.5,1"/>
                                             <ContentPresenter HorizontalAlignment="Center" TextBlock.Foreground="White"/>
@@ -205,7 +279,7 @@
                             </Border>
                             <ListBox Canvas.ZIndex="0" Background="#E5E5E5" Name="lstBx" BorderThickness="1" Padding="0,2,0,0" Height="0" Margin="0,-3,0,0" Grid.Row="1" ItemsSource="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ItemsSource}"/>
                         </Grid>
-                        <ControlTemplate.Triggers>
+                        <!--<ControlTemplate.Triggers>
                             <Trigger Property="IsChecked" Value="true">
                                 <Trigger.EnterActions>
                                     <BeginStoryboard>
@@ -227,7 +301,7 @@
                             <Trigger Property="IsMouseOver" Value="true">
                                 <Setter Property="Cursor" Value="Hand"/>
                             </Trigger>
-                        </ControlTemplate.Triggers>
+                        </ControlTemplate.Triggers>-->
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -247,15 +321,13 @@
                                 <Border CornerRadius="4" BorderBrush="White" BorderThickness="0">
                                     <Border.Background>
                                         <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
-                                            <GradientStopCollection>
-                                                <GradientStop Offset="0" Color="Gray"/>
-                                                <GradientStop Offset="0.08" Color="Black"/>
-                                                <GradientStop Offset="0.92" Color="Black"/>
-                                                <GradientStop Offset="1" Color="Gray"/>
-                                            </GradientStopCollection>
+                                            <GradientStop Offset="0" Color="Gray"/>
+                                            <GradientStop Offset="0.08" Color="Black"/>
+                                            <GradientStop Offset="0.92" Color="Black"/>
+                                            <GradientStop Offset="1" Color="Gray"/>
                                         </LinearGradientBrush>
                                     </Border.Background>
-                                    <ScrollViewer Margin="0" Focusable="True">
+                                    <ScrollViewer Focusable="True">
                                         <StackPanel IsItemsHost="True" />
                                     </ScrollViewer>
                                 </Border>
@@ -274,9 +346,9 @@
                                     </Setter.Value>
                                 </Setter>
                             </Trigger>
-                            <Trigger Property="IsGrouping" Value="true">
+                            <!--<Trigger Property="IsGrouping" Value="true">
                                 <Setter Property="ScrollViewer.CanContentScroll" Value="false" />
-                            </Trigger>
+                            </Trigger>-->
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
@@ -305,9 +377,10 @@
                                                 <DiscreteObjectKeyFrame KeyTime="0:0:0">
                                                     <DiscreteObjectKeyFrame.Value>
                                                         <LinearGradientBrush>
-                                                            <GradientStop Offset="0" Color="Gray"/>
-                                                            <GradientStop Offset="0.4" Color="Black"/>
-                                                            <GradientStop Offset="0.6" Color="Gray"/>
+                                                            <GradientStop Offset="0" Color="Black"/>
+                                                            <GradientStop Offset="0.25" Color="Gray"/>
+                                                            <GradientStop Offset="0.50" Color="Black"/>
+                                                            <GradientStop Offset="0.75" Color="Gray"/>
                                                             <GradientStop Offset="1" Color="Black"/>
                                                         </LinearGradientBrush>
                                                     </DiscreteObjectKeyFrame.Value>
@@ -342,14 +415,15 @@
         </Style>
     </Window.Resources>
     <StackPanel>
-        <local:MagicalButton Content="Watch Now" SubTitle="Movie: " 
+        <local:MagicalButton Content="Watch Now" SubTitle="Movie: "
                              FontSize="10" FontStretch="Condensed" FontWeight="Bold" 
-                             HorizontalAlignment="Center" Style="{StaticResource newBtn}" 
+                             Cursor="Hand"
+                             HorizontalAlignment="Center" Style="{StaticResource mgcBtn}" 
                              x:Name="togg" ItemsSource="{Binding Movies}"/>
 
         <!--<TextBox Visibility="Visible" HorizontalAlignment="Left" VerticalAlignment="Center" Text="Hello"/>
 
-        <local:MagicalButton Style="{StaticResource newBtn}">
+        <local:MagicalButton Style="{StaticResource mgcBtn}">
             <local:MagicalButton.Content>
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Hi" Foreground="red"/>

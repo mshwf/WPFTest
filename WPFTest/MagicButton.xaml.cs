@@ -24,34 +24,6 @@ namespace WpfTests
         public MagicButton()
         {
             InitializeComponent();
-            var isChkd = togg.IsChecked;
-            togg.SizeChanged += Togg_SizeChanged;
-        }
-
-        private void Togg_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            //DoubleAnimation anim = new DoubleAnimation();
-            //anim.From = e.PreviousSize.Width;
-            //anim.To = e.NewSize.Width;
-            //anim.Duration = new Duration(TimeSpan.FromMilliseconds(200));
-            //Storyboard.SetTarget(anim, togg);
-            //Storyboard.SetTargetProperty(anim, new PropertyPath(WidthProperty));
-            //Storyboard st = new Storyboard();
-            //st.Children.Add(anim);
-            //st.Completed += St_Completed;
-            //togg.SizeChanged -= Togg_SizeChanged;
-
-            //st.Begin();
-        }
-
-        private void St_Completed(object sender, EventArgs e)
-        {
-            togg.SizeChanged += Togg_SizeChanged;
-        }
-
-        private void MagicalButton_Click(object sender, RoutedEventArgs e)
-        {
-            
         }
     }
 }
