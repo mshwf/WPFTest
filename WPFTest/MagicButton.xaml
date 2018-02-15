@@ -266,10 +266,11 @@
                                         </Rectangle.Fill>
                                     </Rectangle>
                                     <StackPanel Grid.Column="2" Margin="5,0,5,5" >
-                                        <Grid Margin="0,7,0,0">
-                                            <ContentPresenter HorizontalAlignment="Center" Margin="0.5,1"/>
-                                            <ContentPresenter HorizontalAlignment="Center" TextBlock.Foreground="White"/>
-                                        </Grid>
+                                        <ContentPresenter Margin="0,7,0,0" HorizontalAlignment="Center" TextBlock.Foreground="White">
+                                            <ContentPresenter.Effect>
+                                                <DropShadowEffect BlurRadius="0.5" Direction="270" ShadowDepth="1"/>
+                                            </ContentPresenter.Effect>
+                                        </ContentPresenter>
                                         <StackPanel Orientation="Horizontal">
                                             <TextBlock Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SubTitle}" Foreground="#D3D3D3" FontWeight="Normal" FontSize="8" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                                             <TextBlock Text="{Binding ElementName=lstBx, Path=SelectedItem}" Foreground="Yellow" FontWeight="Bold" FontSize="8" HorizontalAlignment="Center" VerticalAlignment="Top"/>
@@ -420,10 +421,7 @@
                              Cursor="Hand"
                              HorizontalAlignment="Center" Style="{StaticResource mgcBtn}" 
                              x:Name="togg" ItemsSource="{Binding Movies}"/>
-
-        <!--<TextBox Visibility="Visible" HorizontalAlignment="Left" VerticalAlignment="Center" Text="Hello"/>
-
-        <local:MagicalButton Style="{StaticResource mgcBtn}">
+        <!--<local:MagicalButton Style="{StaticResource mgcBtn}">
             <local:MagicalButton.Content>
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Hi" Foreground="red"/>
