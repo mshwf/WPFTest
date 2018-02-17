@@ -5,32 +5,25 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WpfTests;
 
-namespace WpfTests
+namespace WPFTest
 {
     /// <summary>
-    /// Interaction logic for Window1.xaml
+    /// Interaction logic for Wnd_Random.xaml
     /// </summary>
-    public partial class MagicButton : Window
+    public partial class Wnd_Random : Window
     {
-        public MagicButton()
+        public Wnd_Random()
         {
             InitializeComponent();
-            ListBox list = new ListBox();
-            ListBoxItem item = new ListBoxItem();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Hurrray");
+            DataContext = new MagicButtonVM();
         }
     }
 }

@@ -25,11 +25,7 @@ namespace WPFTest
         public int Id { get; set; }
         public string Name { get; set; }
     }
-    public class Person
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
-    }
+  
     public partial class Wnd_DataContext : Window
     {
         public ObservableCollection<Book> books;

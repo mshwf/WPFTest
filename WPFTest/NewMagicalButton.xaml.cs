@@ -5,32 +5,23 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace WpfTests
+namespace WPFTest
 {
     /// <summary>
-    /// Interaction logic for Window1.xaml
+    /// Interaction logic for NewMagicalButton.xaml
     /// </summary>
-    public partial class MagicButton : Window
+    public partial class NewMagicalButton : Window
     {
-        public MagicButton()
+        public NewMagicalButton()
         {
             InitializeComponent();
-            ListBox list = new ListBox();
-            ListBoxItem item = new ListBoxItem();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Hurrray");
         }
     }
 }

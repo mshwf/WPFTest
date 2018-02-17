@@ -4,149 +4,48 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfTests"
-        mc:Ignorable="d"
+        xmlns:conv="clr-namespace:WPFTest.Converters"
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen"
         Title="Magical Button" Height="300" Width="300">
     <Window.DataContext>
         <local:MagicButtonVM/>
     </Window.DataContext>
     <Window.Resources>
-        <Color x:Key="WindowColor">#FFE8EDF9</Color>
-        <Color x:Key="ContentAreaColorLight">#FFC5CBF9</Color>
-        <Color x:Key="ContentAreaColorDark">#FF7381F9</Color>
-
-        <Color x:Key="DisabledControlLightColor">#FFE8EDF9</Color>
-        <Color x:Key="DisabledControlDarkColor">#FFC5CBF9</Color>
-        <Color x:Key="DisabledForegroundColor">#FF888888</Color>
-
-        <Color x:Key="SelectedBackgroundColor">#FFC5CBF9</Color>
-        <Color x:Key="SelectedUnfocusedColor">#FFDDDDDD</Color>
-
-        <Color x:Key="ControlLightColor">White</Color>
-        <Color x:Key="ControlMediumColor">#FF7381F9</Color>
-        <Color x:Key="ControlDarkColor">#FF211AA9</Color>
-
-        <Color x:Key="ControlMouseOverColor">#FF3843C4</Color>
-        <Color x:Key="ControlPressedColor">#FF211AA9</Color>
-
-
-        <Color x:Key="GlyphColor">#FF444444</Color>
-        <Color x:Key="GlyphMouseOver">sc#1, 0.004391443, 0.002428215, 0.242281124</Color>
-
-        <!--Border colors-->
-        <Color x:Key="BorderLightColor">#FFCCCCCC</Color>
-        <Color x:Key="BorderMediumColor">#FF888888</Color>
-        <Color x:Key="BorderDarkColor">#FF444444</Color>
-
-        <Color x:Key="PressedBorderLightColor">#FF888888</Color>
-        <Color x:Key="PressedBorderDarkColor">#FF444444</Color>
-
-        <Color x:Key="DisabledBorderLightColor">#FFAAAAAA</Color>
-        <Color x:Key="DisabledBorderDarkColor">#FF888888</Color>
-
-        <Color x:Key="DefaultBorderBrushDarkColor">Black</Color>
-
-        <!--Control-specific resources.-->
-        <Color x:Key="HeaderTopColor">#FFC5CBF9</Color>
-        <Color x:Key="DatagridCurrentCellBorderColor">Black</Color>
-        <Color x:Key="SliderTrackDarkColor">#FFC5CBF9</Color>
-
-        <Color x:Key="NavButtonFrameColor">#FF3843C4</Color>
-
-        <LinearGradientBrush x:Key="MenuPopupBrush" EndPoint="0.5,1" StartPoint="0.5,0">
-            <GradientStop Color="{DynamicResource ControlLightColor}" Offset="0" />
-            <GradientStop Color="{DynamicResource ControlMediumColor}" Offset="0.5" />
-            <GradientStop Color="{DynamicResource ControlLightColor}" Offset="1" />
-        </LinearGradientBrush>
-
-        <LinearGradientBrush x:Key="ProgressBarIndicatorAnimatedFill" StartPoint="0,0" EndPoint="1,0">
-            <GradientStop Color="#000000FF" Offset="0" />
-            <GradientStop Color="#600000FF" Offset="0.4" />
-            <GradientStop Color="#600000FF" Offset="0.6" />
-            <GradientStop Color="#000000FF" Offset="1" />
-        </LinearGradientBrush>
-        <Style x:Key="btnStyle" TargetType="{x:Type Button}">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Grid>
-                            <Border BorderBrush="#97CDFF" BorderThickness="1" CornerRadius="20" Padding="0,20,40,0" ClipToBounds="True">
-                                <Border.Background>
-                                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
-                                        <GradientStop Offset="-0.5" Color="Transparent" x:Name="stop1"/>
-                                        <GradientStop Offset="0.5" Color="#97CDFF"/>
-                                        <GradientStop Offset="1.5" Color="Transparent" x:Name="stop2"/>
-                                    </LinearGradientBrush>
-                                </Border.Background>
-                            </Border>
-                            <Grid>
-                                <Viewbox Stretch="None">
-                                    <ContentPresenter x:Name="myContentPresenter" VerticalAlignment="Stretch" HorizontalAlignment="Left"/>
-                                </Viewbox>
-                            </Grid>
-                        </Grid>
-                        <ControlTemplate.Triggers>
-                            <EventTrigger  RoutedEvent="Mouse.MouseEnter">
-                                <EventTrigger.Actions>
-                                    <BeginStoryboard Name="animate">
-                                        <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetName="stop1" Duration="0:0:0.2" Storyboard.TargetProperty="Offset" To="-1"/>
-                                            <DoubleAnimation Storyboard.TargetName="stop2" Duration="0:0:0.2" Storyboard.TargetProperty="Offset" To="2"/>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </EventTrigger.Actions>
-                            </EventTrigger>
-                            <EventTrigger RoutedEvent="Mouse.MouseLeave">
-                                <EventTrigger.Actions>
-                                    <BeginStoryboard Name="animate2">
-                                        <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetName="stop1" Duration="0:0:0.2" Storyboard.TargetProperty="Offset" To="-0.5"/>
-                                            <DoubleAnimation Storyboard.TargetName="stop2" Duration="0:0:0.2" Storyboard.TargetProperty="Offset" To="1.5"/>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </EventTrigger.Actions>
-                            </EventTrigger>
-                            <EventTrigger RoutedEvent="Button.PreviewMouseLeftButtonDown">
-                                <BeginStoryboard Name="animate3">
-                                    <Storyboard>
-                                        <DoubleAnimation Storyboard.TargetName="stop1" Duration="0:0:0.2" Storyboard.TargetProperty="Offset" To="-3"/>
-                                        <DoubleAnimation Storyboard.TargetName="stop2" Duration="0:0:0.2" Storyboard.TargetProperty="Offset" To="3"/>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </EventTrigger>
-                            <EventTrigger RoutedEvent="Button.PreviewMouseLeftButtonUp">
-                                <BeginStoryboard Name="animate4">
-                                    <Storyboard>
-                                        <DoubleAnimation Storyboard.TargetName="stop1" Duration="0:0:0.2" Storyboard.TargetProperty="Offset" To="-1"/>
-                                        <DoubleAnimation Storyboard.TargetName="stop2" Duration="0:0:0.2" Storyboard.TargetProperty="Offset" To="2"/>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </EventTrigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        <Style TargetType="{x:Type TextBox}">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type TextBox}">
-                        <Grid>
-                            <Border Background="Transparent" BorderThickness="1" BorderBrush="Blue" CornerRadius="5" Padding="0">
-                                <Grid>
-                                    <Border Padding="2" Background="Transparent" BorderBrush="Red" CornerRadius="5" BorderThickness="01">
-                                        <TextBox Style="{x:Null}" BorderThickness="0"  Text="{TemplateBinding Text}"/>
-                                    </Border>
-                                </Grid>
-                            </Border>
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
+        <conv:StreamingConverter x:Key="txtConv"/>
+        <conv:ColorConverter x:Key="colConv"/>
         <LinearGradientBrush x:Key="btn3d" StartPoint="0.5,0" EndPoint="0.5,1">
             <GradientStop Offset="0" Color="Gray"/>
             <GradientStop Offset="1" Color="Black"/>
         </LinearGradientBrush>
+
+        <Storyboard x:Key="selectedItem">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Border" Storyboard.TargetProperty="Background">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                    <DiscreteObjectKeyFrame.Value>
+                        <LinearGradientBrush>
+                            <GradientStop Offset="0" Color="Gray"/>
+                            <GradientStop Offset="0.4" Color="#1D1D1D"/>
+                            <GradientStop Offset="0.6" Color="Gray"/>
+                            <GradientStop Offset="1" Color="#1D1D1D"/>
+                        </LinearGradientBrush>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Border" Storyboard.TargetProperty="BorderBrush">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                    <DiscreteObjectKeyFrame.Value>
+                        <LinearGradientBrush>
+                            <GradientStop Offset="0" Color="White"/>
+                            <GradientStop Offset="0.25" Color="Black"/>
+                            <GradientStop Offset="0.5" Color="White"/>
+                            <GradientStop Offset="0.75" Color="Black"/>
+                            <GradientStop Offset="1" Color="White"/>
+                        </LinearGradientBrush>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
 
         <Style TargetType="{x:Type ContentControl}" x:Key="mgcBtn">
             <Setter Property="Padding" Value="30,10"/>
@@ -168,19 +67,10 @@
                                     <ToggleButton Padding="30, 10">
                                         <ToggleButton.Template>
                                             <ControlTemplate TargetType="ToggleButton">
-                                                <Border Background="Transparent" >
+                                                <Border Background="Transparent">
                                                     <Border.RenderTransform>
                                                         <RotateTransform x:Name="rotRect" Angle="0"/>
                                                     </Border.RenderTransform>
-                                                    <!--<Polygon Points="12,12 12,26, 22,19" Fill="#4B86B1" Margin="0,0,5,0" >
-                                                        <Polygon.RenderTransform>
-                                                            <RotateTransform x:Name="rotRect2" Angle="0" CenterX="17" CenterY="19"/>
-                                                        </Polygon.RenderTransform>
-                                                        <Polygon.Effect>
-                                                            <DropShadowEffect ShadowDepth="0.5" Direction="0" Color="Black"  Opacity="1" BlurRadius="1"/>
-                                                        </Polygon.Effect>
-                                                    </Polygon>-->
-
                                                     <Polygon Points="12,12 12,26, 22,19" Fill="#4B86B1" RenderTransformOrigin="0.75,0.75"
                                                              HorizontalAlignment="Left" VerticalAlignment="Top">
                                                         <Polygon.RenderTransform>
@@ -196,7 +86,6 @@
                                                         <BeginStoryboard>
                                                             <Storyboard>
                                                                 <DoubleAnimation Storyboard.TargetName="rotRect2" Storyboard.TargetProperty="Angle" From="0" To="90" Duration="0:0:0.5"/>
-                                                                <!--<DoubleAnimation Storyboard.TargetName="lstBx" Storyboard.TargetProperty="Height" From="0" To="60" Duration="0:0:0.5"/>-->
                                                             </Storyboard>
                                                         </BeginStoryboard>
                                                     </EventTrigger>
@@ -204,59 +93,13 @@
                                                         <BeginStoryboard>
                                                             <Storyboard>
                                                                 <DoubleAnimation Storyboard.TargetName="rotRect2" Storyboard.TargetProperty="Angle" From="90" To="0" Duration="0:0:0.5"/>
-                                                                <!--<DoubleAnimation Storyboard.Target="{Binding ElementName=lstBx, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBox}}}" Storyboard.TargetProperty="Height" From="0" To="60" Duration="0:0:0.5"/>-->
                                                             </Storyboard>
                                                         </BeginStoryboard>
                                                     </EventTrigger>
                                                 </ControlTemplate.Triggers>
                                             </ControlTemplate>
                                         </ToggleButton.Template>
-                                        <!--<ToggleButton.Triggers>
-                                            <EventTrigger RoutedEvent="ToggleButton.Checked">
-                                                <BeginStoryboard>
-                                                    <Storyboard>
-                                                        <DoubleAnimation Storyboard.TargetName="rotRect" Storyboard.TargetProperty="Angle" From="0" To="90" Duration="0:0:0.5"/>
-                                                    </Storyboard>
-                                                </BeginStoryboard>
-                                            </EventTrigger>
-                                            <EventTrigger RoutedEvent="ToggleButton.Unchecked">
-                                                <BeginStoryboard>
-                                                    <Storyboard>
-                                                        <DoubleAnimation Storyboard.TargetName="rotRect" Storyboard.TargetProperty="Angle" From="0" To="90" Duration="0:0:0.5"/>
-                                                    </Storyboard>
-                                                </BeginStoryboard>
-                                            </EventTrigger>
-
-                                            -->
-                                        <!--<Trigger Property="ToggleButton.IsChecked" Value="true">
-                                                <Trigger.EnterActions>
-                                                    <BeginStoryboard>
-                                                        <Storyboard>
-                                                            <DoubleAnimation Storyboard.TargetName="rotRect" Storyboard.TargetProperty="Angle" From="0" To="90" Duration="0:0:0.5"/>
-                                                            
-                                        <DoubleAnimation Storyboard.Target="{Binding ElementName=lstBx, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBox}}}" Storyboard.TargetProperty="Height" From="0" To="60" Duration="0:0:0.5"/>
-                                        
-                                                        </Storyboard>
-                                                    </BeginStoryboard>
-                                                </Trigger.EnterActions>
-                                                <Trigger.ExitActions>
-                                                    <BeginStoryboard>
-                                                        <Storyboard>
-                                                            <DoubleAnimation Storyboard.TargetName="rotRect" Storyboard.TargetProperty="Angle" From="90" To="0" Duration="0:0:0.5"/>
-                                                            -->
-                                        <!--<DoubleAnimation Storyboard.Target="{Binding ElementName=lstBx, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBox}}}" Storyboard.TargetProperty="Height" From="60" To="0" Duration="0:0:0.5"/>-->
-                                        <!--
-                                                        </Storyboard>
-                                                    </BeginStoryboard>
-                                                </Trigger.ExitActions>
-                                            </Trigger>-->
-                                        <!--<Trigger Property="IsMouseOver" Value="true">
-                                                <Setter Property="Cursor" Value="Hand"/>
-                                            </Trigger>-->
-                                        <!--
-                                        </ToggleButton.Triggers>-->
                                     </ToggleButton>
-
                                     <Rectangle Grid.Column="1">
                                         <Rectangle.Fill>
                                             <LinearGradientBrush StartPoint="0.25,0" EndPoint="1,1">
@@ -265,48 +108,60 @@
                                             </LinearGradientBrush>
                                         </Rectangle.Fill>
                                     </Rectangle>
-                                    <StackPanel Grid.Column="2" Margin="5,0,5,5" >
-                                        <ContentPresenter Margin="0,7,0,0" HorizontalAlignment="Center" TextBlock.Foreground="White">
-                                            <ContentPresenter.Effect>
-                                                <DropShadowEffect BlurRadius="0.5" Direction="270" ShadowDepth="1"/>
-                                            </ContentPresenter.Effect>
-                                        </ContentPresenter>
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SubTitle}" Foreground="#D3D3D3" FontWeight="Normal" FontSize="8" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                                            <TextBlock Text="{Binding ElementName=lstBx, Path=SelectedItem}" Foreground="Yellow" FontWeight="Bold" FontSize="8" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                                        </StackPanel>
-                                    </StackPanel>
+                                    <Grid Grid.Column="2" MinWidth="100" Height="35" >
+                                        <Button Command="{Binding ElementName=togg, Path=Command}" CommandParameter="{Binding ElementName=lstBx, Path=SelectedItem}" Content="{TemplateBinding Content}" Background="Red">
+                                            <Button.Template>
+                                                <ControlTemplate TargetType="Button">
+                                                    <Border CornerRadius="4" >
+                                                        <StackPanel Background="Transparent">
+                                                            <Grid>
+                                                                <ContentPresenter HorizontalAlignment="Center" TextBlock.Foreground="White" Margin="0,5,0,0">
+                                                                    <ContentPresenter.Effect>
+                                                                        <DropShadowEffect BlurRadius="0.5" Direction="270" ShadowDepth="1"/>
+                                                                    </ContentPresenter.Effect>
+                                                                </ContentPresenter>
+                                                            </Grid>
+                                                            <StackPanel Orientation="Horizontal" Margin="3,0">
+                                                                <TextBlock Text="{Binding ElementName=togg, Path=SubTitle}" Foreground="#D3D3D3" FontWeight="Normal" FontSize="8" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                                                                <TextBlock Text="{Binding ElementName=lstBx, Path=SelectedItem.Title}" 
+                                                                           Foreground="Gold" FontWeight="Bold" FontSize="8" 
+                                                                           HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                                                            </StackPanel>
+                                                        </StackPanel>
+                                                    </Border>
+                                                </ControlTemplate>
+                                            </Button.Template>
+                                        </Button>
+                                    </Grid>
                                 </Grid>
                             </Border>
-                            <ListBox Canvas.ZIndex="0" Background="#E5E5E5" Name="lstBx" BorderThickness="1" Padding="0,2,0,0" Height="0" Margin="0,-3,0,0" Grid.Row="1" ItemsSource="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ItemsSource}"/>
-                        </Grid>
-                        <!--<ControlTemplate.Triggers>
-                            <Trigger Property="IsChecked" Value="true">
-                                <Trigger.EnterActions>
+                            <ListBox Canvas.ZIndex="0" Name="lstBx" BorderThickness="1" Height="0" Grid.Row="1" 
+                                     ItemsSource="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ItemsSource}" 
+                                     DisplayMemberPath="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=DisplayMemberPath}" 
+                                     SelectedValuePath="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SelectedValuePath}"/>
+
+                            <Grid.Triggers>
+                                <EventTrigger RoutedEvent="ToggleButton.Checked">
                                     <BeginStoryboard>
                                         <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetName="rotRect" Storyboard.TargetProperty="Angle" From="0" To="90" Duration="0:0:0.5"/>
                                             <DoubleAnimation Storyboard.TargetName="lstBx" Storyboard.TargetProperty="Height" From="0" To="60" Duration="0:0:0.5"/>
                                         </Storyboard>
                                     </BeginStoryboard>
-                                </Trigger.EnterActions>
-                                <Trigger.ExitActions>
+                                </EventTrigger>
+                                <EventTrigger RoutedEvent="ToggleButton.Unchecked">
                                     <BeginStoryboard>
                                         <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetName="rotRect" Storyboard.TargetProperty="Angle" From="90" To="0" Duration="0:0:0.5"/>
                                             <DoubleAnimation Storyboard.TargetName="lstBx" Storyboard.TargetProperty="Height" From="60" To="0" Duration="0:0:0.5"/>
                                         </Storyboard>
                                     </BeginStoryboard>
-                                </Trigger.ExitActions>
-                            </Trigger>
-                            <Trigger Property="IsMouseOver" Value="true">
-                                <Setter Property="Cursor" Value="Hand"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>-->
+                                </EventTrigger>
+                            </Grid.Triggers>
+                        </Grid>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
+
         <Style x:Key="{x:Type ListBox}" TargetType="ListBox">
             <Setter Property="Foreground" Value="Wheat"/>
             <Setter Property="Template">
@@ -347,9 +202,6 @@
                                     </Setter.Value>
                                 </Setter>
                             </Trigger>
-                            <!--<Trigger Property="IsGrouping" Value="true">
-                                <Setter Property="ScrollViewer.CanContentScroll" Value="false" />
-                            </Trigger>-->
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
@@ -363,72 +215,39 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ListBoxItem">
-                        <Border x:Name="Border"
-                Padding="2"
-                SnapsToDevicePixels="true">
-                            <Border.Background>
-                                <SolidColorBrush Color="Transparent" />
-                            </Border.Background>
+                        <Border x:Name="Border" 
+                                BorderThickness="1"
+                                Padding="2"
+                                SnapsToDevicePixels="true">
                             <VisualStateManager.VisualStateGroups>
                                 <VisualStateGroup x:Name="SelectionStates">
                                     <VisualState x:Name="Unselected" />
-                                    <VisualState x:Name="Selected">
-                                        <Storyboard>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Border" Storyboard.TargetProperty="Background">
-                                                <DiscreteObjectKeyFrame KeyTime="0:0:0">
-                                                    <DiscreteObjectKeyFrame.Value>
-                                                        <LinearGradientBrush>
-                                                            <GradientStop Offset="0" Color="Black"/>
-                                                            <GradientStop Offset="0.25" Color="Gray"/>
-                                                            <GradientStop Offset="0.50" Color="Black"/>
-                                                            <GradientStop Offset="0.75" Color="Gray"/>
-                                                            <GradientStop Offset="1" Color="Black"/>
-                                                        </LinearGradientBrush>
-                                                    </DiscreteObjectKeyFrame.Value>
-                                                </DiscreteObjectKeyFrame>
-                                            </ObjectAnimationUsingKeyFrames>
-                                        </Storyboard>
-                                    </VisualState>
-                                    <VisualState x:Name="SelectedUnfocused">
-                                        <Storyboard>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Border" Storyboard.TargetProperty="Background">
-                                                <DiscreteObjectKeyFrame KeyTime="0:0:0">
-                                                    <DiscreteObjectKeyFrame.Value>
-                                                        <LinearGradientBrush>
-                                                            <GradientStop Offset="0" Color="Gray"/>
-                                                            <GradientStop Offset="0.4" Color="Black"/>
-                                                            <GradientStop Offset="0.6" Color="Gray"/>
-                                                            <GradientStop Offset="1" Color="Black"/>
-                                                        </LinearGradientBrush>
-                                                    </DiscreteObjectKeyFrame.Value>
-                                                </DiscreteObjectKeyFrame>
-                                            </ObjectAnimationUsingKeyFrames>
-                                        </Storyboard>
-                                    </VisualState>
+                                    <VisualState x:Name="Selected" Storyboard="{StaticResource selectedItem}"/>
+                                    <VisualState x:Name="SelectedUnfocused" Storyboard="{StaticResource selectedItem}"/>
                                 </VisualStateGroup>
                             </VisualStateManager.VisualStateGroups>
                             <ContentPresenter />
                         </Border>
-
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
     </Window.Resources>
-    <StackPanel>
-        <local:MagicalButton Content="Watch Now" SubTitle="Movie: "
+    <Grid>
+        <local:MagicalButton DockPanel.Dock="Right" x:Name="togg" Content="Watch Now" SubTitle="Movie: "
                              FontSize="10" FontStretch="Condensed" FontWeight="Bold" 
-                             Cursor="Hand"
-                             HorizontalAlignment="Center" Style="{StaticResource mgcBtn}" 
-                             x:Name="togg" ItemsSource="{Binding Movies}"/>
-        <!--<local:MagicalButton Style="{StaticResource mgcBtn}">
-            <local:MagicalButton.Content>
-                <StackPanel Orientation="Horizontal">
-                    <Label Content="Hi" Foreground="red"/>
-                    <Label Content="World" Foreground="Blue"/>
-                    <Image Source="D:\Mohamed El-Shawaf\Projects\WpfTests\WpfTests\Images\sss.png" Width="20"/>
-                </StackPanel>
-            </local:MagicalButton.Content>
-        </local:MagicalButton>-->
-    </StackPanel>
+                             Cursor="Hand" 
+                             HorizontalAlignment="Center" VerticalAlignment="Top"
+                             Style="{StaticResource mgcBtn}" 
+                             ItemsSource="{Binding Movies}" Command="{Binding OnWatchNow}" 
+                             DisplayMemberPath="Title"
+                             SelectedValuePath="Rating"/>
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center"> 
+            <TextBlock FontWeight="Bold" Text="{Binding SelectedMovie, Converter={StaticResource txtConv}}" 
+                       Foreground="{Binding SelectedMovie, Converter={StaticResource colConv}}"
+                       HorizontalAlignment="Left" />
+            <TextBlock Text="{Binding SelectedMovie}" HorizontalAlignment="Center" />
+
+        </StackPanel>
+    </Grid>
 </Window>
