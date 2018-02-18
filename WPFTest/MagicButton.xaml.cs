@@ -25,8 +25,9 @@ namespace WpfTests
         {
             InitializeComponent();
             ListBox list = new ListBox();
-            ListBoxItem item = new ListBoxItem();
-        }
+            ContentControl cc = new ContentControl();
+            
+                }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {

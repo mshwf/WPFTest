@@ -16,7 +16,7 @@ namespace WPFTest.Converters
             if (value == null)
                 return "No movie selected!";
             else
-                return "Streeming.. ";
+                return "Streaming.. ";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

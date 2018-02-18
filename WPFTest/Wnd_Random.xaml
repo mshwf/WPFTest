@@ -5,9 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFTest"
         mc:Ignorable="d"
-        Title="Wnd_Random" Height="300" Width="300">
+        Title="Wnd_Random" Height="500" Width="500">
   
     <Grid>
-        <ListBox ItemsSource="{Binding Movies2}" DisplayMemberPath="Rating"/>
+        <!--<ListBox Name="lstBx" ItemsSource="{Binding Movies}" DisplayMemberPath="Title" VerticalAlignment="Top"/>
+        <TextBlock Text="{Binding ElementName=lstBx, Path=SelectedItem.Title}" VerticalAlignment="Center"/>-->
+        <Rectangle Width="100" Height="100" Fill="#ccffd700">
+            <!--<Rectangle.Fill>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Offset="0" Color="Gray"/>
+                    <GradientStop Offset="0.4" Color="Black"/>
+                    <GradientStop Offset="0.5" Color="Gray"/>
+                    <GradientStop Offset="0.6" Color="Black"/>
+                    <GradientStop Offset="1" Color="Gray"/>
+                </LinearGradientBrush>
+            </Rectangle.Fill>-->
+        </Rectangle>
     </Grid>
 </Window>

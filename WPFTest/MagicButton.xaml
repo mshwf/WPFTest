@@ -23,10 +23,9 @@
                 <DiscreteObjectKeyFrame KeyTime="0:0:0">
                     <DiscreteObjectKeyFrame.Value>
                         <LinearGradientBrush>
-                            <GradientStop Offset="0" Color="Gray"/>
-                            <GradientStop Offset="0.4" Color="#1D1D1D"/>
-                            <GradientStop Offset="0.6" Color="Gray"/>
-                            <GradientStop Offset="1" Color="#1D1D1D"/>
+                            <GradientStop Offset="0.2" Color="Black"/>
+                            <GradientStop Offset="0.6" Color="#73ffd700"/>
+                            <GradientStop Offset="0.65" Color="Black"/>
                         </LinearGradientBrush>
                     </DiscreteObjectKeyFrame.Value>
                 </DiscreteObjectKeyFrame>
@@ -123,7 +122,7 @@
                                                             </Grid>
                                                             <StackPanel Orientation="Horizontal" Margin="3,0">
                                                                 <TextBlock Text="{Binding ElementName=togg, Path=SubTitle}" Foreground="#D3D3D3" FontWeight="Normal" FontSize="8" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                                                                <TextBlock Text="{Binding ElementName=lstBx, Path=SelectedItem.Title}" 
+                                                                <TextBlock Text="{Binding ElementName=lstBx, Path=SelectedValue}" 
                                                                            Foreground="Gold" FontWeight="Bold" FontSize="8" 
                                                                            HorizontalAlignment="Center" VerticalAlignment="Top"/>
                                                             </StackPanel>
@@ -138,7 +137,7 @@
                             <ListBox Canvas.ZIndex="0" Name="lstBx" BorderThickness="1" Height="0" Grid.Row="1" 
                                      ItemsSource="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ItemsSource}" 
                                      DisplayMemberPath="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=DisplayMemberPath}" 
-                                     SelectedValuePath="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SelectedValuePath}"/>
+                                     SelectedValuePath="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=DisplayMemberPath}"/>
 
                             <Grid.Triggers>
                                 <EventTrigger RoutedEvent="ToggleButton.Checked">
@@ -163,13 +162,13 @@
         </Style>
 
         <Style x:Key="{x:Type ListBox}" TargetType="ListBox">
-            <Setter Property="Foreground" Value="Wheat"/>
+            <Setter Property="Foreground" Value="#AEAEAE"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ListBox">
                         <Border Name="Border"
-                BorderThickness="1"
-                CornerRadius="4">
+                                BorderThickness="1"
+                                CornerRadius="4">
                             <Border.BorderBrush>
                                 <SolidColorBrush Color="{StaticResource BorderMediumColor}" />
                             </Border.BorderBrush>
@@ -189,20 +188,6 @@
                                 </Border>
                             </Grid>
                         </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsEnabled" Value="false">
-                                <Setter TargetName="Border" Property="Background">
-                                    <Setter.Value>
-                                        <SolidColorBrush Color="{StaticResource DisabledControlLightColor}" />
-                                    </Setter.Value>
-                                </Setter>
-                                <Setter TargetName="Border" Property="BorderBrush">
-                                    <Setter.Value>
-                                        <SolidColorBrush Color="{StaticResource DisabledBorderLightColor}" />
-                                    </Setter.Value>
-                                </Setter>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -211,7 +196,6 @@
         <Style x:Key="{x:Type ListBoxItem}" TargetType="ListBoxItem">
             <Setter Property="SnapsToDevicePixels" Value="true" />
             <Setter Property="OverridesDefaultStyle" Value="true" />
-
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ListBoxItem">
@@ -226,7 +210,7 @@
                                     <VisualState x:Name="SelectedUnfocused" Storyboard="{StaticResource selectedItem}"/>
                                 </VisualStateGroup>
                             </VisualStateManager.VisualStateGroups>
-                            <ContentPresenter />
+                            <ContentPresenter/>
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
@@ -240,12 +224,12 @@
                              HorizontalAlignment="Center" VerticalAlignment="Top"
                              Style="{StaticResource mgcBtn}" 
                              ItemsSource="{Binding Movies}" Command="{Binding OnWatchNow}" 
-                             DisplayMemberPath="Title"
-                             SelectedValuePath="Rating"/>
-        <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center"> 
+                             DisplayMemberPath="Title"/>
+        
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center"> 
             <TextBlock FontWeight="Bold" Text="{Binding SelectedMovie, Converter={StaticResource txtConv}}" 
                        Foreground="{Binding SelectedMovie, Converter={StaticResource colConv}}"
-                       HorizontalAlignment="Left" />
+                       HorizontalAlignment="Left"/>
             <TextBlock Text="{Binding SelectedMovie}" HorizontalAlignment="Center" />
 
         </StackPanel>
