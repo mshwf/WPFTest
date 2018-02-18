@@ -13,10 +13,25 @@ namespace WPFTest.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value == null)
-                return "No movie selected!";
-            else
-                return "Streaming.. ";
+            switch (parameter)
+            {
+                case "text":
+                    if (value == null)
+                        return "No movie selected!";
+                    else
+                        return "Streaming.. ";
+                case "color":
+                    if (value == null)
+                        return "Red";
+                    else
+                        return "Green";
+                default:
+                    break;
+
+            }
+            return null;
+
+
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

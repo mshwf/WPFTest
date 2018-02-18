@@ -12,7 +12,6 @@
     </Window.DataContext>
     <Window.Resources>
         <conv:StreamingConverter x:Key="txtConv"/>
-        <conv:ColorConverter x:Key="colConv"/>
         <LinearGradientBrush x:Key="btn3d" StartPoint="0.5,0" EndPoint="0.5,1">
             <GradientStop Offset="0" Color="Gray"/>
             <GradientStop Offset="1" Color="Black"/>
@@ -63,7 +62,7 @@
                                         <ColumnDefinition Width="1"/>
                                         <ColumnDefinition Width="2*"/>
                                     </Grid.ColumnDefinitions>
-                                    <ToggleButton Padding="30, 10">
+                                    <ToggleButton Padding="30, 10" Name="tog">
                                         <ToggleButton.Template>
                                             <ControlTemplate TargetType="ToggleButton">
                                                 <Border Background="Transparent">
@@ -108,10 +107,13 @@
                                         </Rectangle.Fill>
                                     </Rectangle>
                                     <Grid Grid.Column="2" MinWidth="100" Height="35" >
-                                        <Button Command="{Binding ElementName=togg, Path=Command}" CommandParameter="{Binding ElementName=lstBx, Path=SelectedItem}" Content="{TemplateBinding Content}" Background="Red">
+                                        <Button Command="{Binding ElementName=ElBox, Path=Command}" 
+                                                CommandParameter="{Binding ElementName=lstBx, Path=SelectedItem}" 
+                                                Content="{TemplateBinding Content}" 
+                                                Background="Red" Name="btn">
                                             <Button.Template>
                                                 <ControlTemplate TargetType="Button">
-                                                    <Border CornerRadius="4" >
+                                                    <Border CornerRadius="4">
                                                         <StackPanel Background="Transparent">
                                                             <Grid>
                                                                 <ContentPresenter HorizontalAlignment="Center" TextBlock.Foreground="White" Margin="0,5,0,0">
@@ -121,7 +123,7 @@
                                                                 </ContentPresenter>
                                                             </Grid>
                                                             <StackPanel Orientation="Horizontal" Margin="3,0">
-                                                                <TextBlock Text="{Binding ElementName=togg, Path=SubTitle}" Foreground="#D3D3D3" FontWeight="Normal" FontSize="8" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                                                                <TextBlock Text="{Binding ElementName=ElBox, Path=SubTitle}" Foreground="#D3D3D3" FontWeight="Normal" FontSize="8" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                                                                 <TextBlock Text="{Binding ElementName=lstBx, Path=SelectedValue}" 
                                                                            Foreground="Gold" FontWeight="Bold" FontSize="8" 
                                                                            HorizontalAlignment="Center" VerticalAlignment="Top"/>
@@ -154,6 +156,15 @@
                                         </Storyboard>
                                     </BeginStoryboard>
                                 </EventTrigger>
+                                <!--<EventTrigger RoutedEvent="Button.Click" SourceName="btn">
+                                    <BeginStoryboard>
+                                        <Storyboard >
+                                            <BooleanAnimationUsingKeyFrames Storyboard.TargetName="tog" Storyboard.TargetProperty="IsChecked">
+                                                <DiscreteBooleanKeyFrame KeyTime="0:0:0" Value="False"/>
+                                            </BooleanAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>-->
                             </Grid.Triggers>
                         </Grid>
                     </ControlTemplate>
@@ -218,18 +229,18 @@
         </Style>
     </Window.Resources>
     <Grid>
-        <local:MagicalButton DockPanel.Dock="Right" x:Name="togg" Content="Watch Now" SubTitle="Movie: "
-                             FontSize="10" FontStretch="Condensed" FontWeight="Bold" 
-                             Cursor="Hand" 
+        <local:MagicalButton x:Name="ElBox" Content="Watch Now" SubTitle="Movie: "
+                             FontSize="10" FontStretch="Condensed" FontWeight="Bold"
+                             Cursor="Hand"
                              HorizontalAlignment="Center" VerticalAlignment="Top"
                              Style="{StaticResource mgcBtn}" 
                              ItemsSource="{Binding Movies}" Command="{Binding OnWatchNow}" 
                              DisplayMemberPath="Title"/>
-        
-        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center"> 
-            <TextBlock FontWeight="Bold" Text="{Binding SelectedMovie, Converter={StaticResource txtConv}}" 
-                       Foreground="{Binding SelectedMovie, Converter={StaticResource colConv}}"
-                       HorizontalAlignment="Left"/>
+
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <TextBlock FontWeight="Bold" HorizontalAlignment="Left"
+                       Text="{Binding SelectedMovie, Converter={StaticResource txtConv}, ConverterParameter=text}" 
+                       Foreground="{Binding SelectedMovie, Converter={StaticResource txtConv}, ConverterParameter=color}"/>
             <TextBlock Text="{Binding SelectedMovie}" HorizontalAlignment="Center" />
 
         </StackPanel>

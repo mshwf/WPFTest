@@ -21,7 +21,6 @@ namespace WpfTests
         public static readonly DependencyProperty CommandProperty =
             DependencyProperty.Register("Command", typeof(ICommand), typeof(MagicalButton), new PropertyMetadata(null));
 
-
         public object CommandParameter
         {
             get { return GetValue(CommandParameterProperty); }
@@ -30,7 +29,6 @@ namespace WpfTests
 
         public static readonly DependencyProperty CommandParameterProperty =
             DependencyProperty.Register("CommandParameter", typeof(object), typeof(MagicalButton), new PropertyMetadata(null));
-
 
         public string SubTitle
         {

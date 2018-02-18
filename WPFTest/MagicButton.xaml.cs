@@ -26,12 +26,16 @@ namespace WpfTests
             InitializeComponent();
             ListBox list = new ListBox();
             ContentControl cc = new ContentControl();
+            ToggleButton tg = new ToggleButton();
+            //tg.IsChecked = true;
+            Button btn = new Button();
             
-                }
+        }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Hurrray");
+            //togg.IsChecked = true;
+
         }
     }
 }
