@@ -17,6 +17,20 @@ namespace WpfTests
             get { return (ICommand)GetValue(CommandProperty); }
             set { SetValue(CommandProperty, value); }
         }
+        public static readonly RoutedEvent ClickEvent = EventManager.RegisterRoutedEvent("Click", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(MagicalButton));
+
+
+        public event RoutedEventHandler Click
+        {
+            add { AddHandler(ClickEvent, value); }
+            remove { RemoveHandler(ClickEvent, value); }
+        }
+
+        void RaiseTapEvent()
+        {
+            RoutedEventArgs newEventArgs = new RoutedEventArgs(MagicalButton.ClickEvent);
+            RaiseEvent(newEventArgs);
+        }
 
         public static readonly DependencyProperty CommandProperty =
             DependencyProperty.Register("Command", typeof(ICommand), typeof(MagicalButton), new PropertyMetadata(null));
@@ -57,6 +71,17 @@ namespace WpfTests
 
         public static readonly DependencyProperty ItemsSourceProperty =
             DependencyProperty.Register("ItemsSource", typeof(IEnumerable<object>), typeof(MagicalButton));
+
+
+        public object SelectedItem
+        {
+            get { return GetValue(SelectedItemProperty); }
+            set { SetValue(SelectedItemProperty, value); }
+        }
+
+        public static readonly DependencyProperty SelectedItemProperty =
+            DependencyProperty.Register("SelectedItem", typeof(object), typeof(MagicalButton), new PropertyMetadata(null));
+
 
         public string DisplayMemberPath
         {

@@ -25,16 +25,25 @@ namespace WpfTests
         {
             InitializeComponent();
             ListBox list = new ListBox();
-            ContentControl cc = new ContentControl();
+            //list.SelectionChanged
+            //ContentControl cc = new ContentControl();
             ToggleButton tg = new ToggleButton();
             //tg.IsChecked = true;
             Button btn = new Button();
-            
+            Thumb th = new Thumb();
+            //th.MouseLeftButtonDown
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             //togg.IsChecked = true;
+
+        }
+
+
+        private void ElBox_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            MessageBox.Show("Succ");
 
         }
     }

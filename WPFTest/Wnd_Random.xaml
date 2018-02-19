@@ -6,20 +6,24 @@
         xmlns:local="clr-namespace:WPFTest"
         mc:Ignorable="d"
         Title="Wnd_Random" Height="500" Width="500">
-  
+
     <Grid>
-        <!--<ListBox Name="lstBx" ItemsSource="{Binding Movies}" DisplayMemberPath="Title" VerticalAlignment="Top"/>
-        <TextBlock Text="{Binding ElementName=lstBx, Path=SelectedItem.Title}" VerticalAlignment="Center"/>-->
-        <Rectangle Width="100" Height="100" Fill="#ccffd700">
-            <!--<Rectangle.Fill>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+        <Border BorderThickness="8" CornerRadius="40" VerticalAlignment="Center" HorizontalAlignment="Center" Width="300" Height="300">
+            <Border.BorderBrush>
+                <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
                     <GradientStop Offset="0" Color="Gray"/>
-                    <GradientStop Offset="0.4" Color="Black"/>
-                    <GradientStop Offset="0.5" Color="Gray"/>
-                    <GradientStop Offset="0.6" Color="Black"/>
-                    <GradientStop Offset="1" Color="Gray"/>
+                    <GradientStop Offset="1" Color="Black"/>
                 </LinearGradientBrush>
-            </Rectangle.Fill>-->
-        </Rectangle>
+            </Border.BorderBrush>
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
+                    <GradientStop Offset="1.0" Color="Black"/>
+                    <GradientStop Offset="0.99999" Color="Black"/>
+                    <GradientStop Offset="0.5" Color="Gray"/>
+                    <GradientStop Offset="0.00009" Color="Black"/>
+                    <GradientStop Offset="0.0" Color="Black"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+        </Border>
     </Grid>
 </Window>

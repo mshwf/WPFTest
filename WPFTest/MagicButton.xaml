@@ -45,12 +45,63 @@
             </ObjectAnimationUsingKeyFrames>
         </Storyboard>
 
+        <Style x:Key="listBoxStyle" TargetType="ListBox">
+            <Setter Property="Foreground" Value="#AEAEAE"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBox">
+                        <Border Name="Border"
+                                BorderThickness="1"
+                                CornerRadius="4" BorderBrush="#FF888888">
+                            <Grid>
+                                <Border CornerRadius="4" BorderBrush="White" BorderThickness="0">
+                                    <Border.Background>
+                                        <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                            <GradientStop Offset="0" Color="Gray"/>
+                                            <GradientStop Offset="0.08" Color="Black"/>
+                                            <GradientStop Offset="0.92" Color="Black"/>
+                                            <GradientStop Offset="1" Color="Gray"/>
+                                        </LinearGradientBrush>
+                                    </Border.Background>
+                                    <ScrollViewer Focusable="True">
+                                        <StackPanel IsItemsHost="True" />
+                                    </ScrollViewer>
+                                </Border>
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ListBoxItemStyle" TargetType="ListBoxItem">
+            <Setter Property="SnapsToDevicePixels" Value="true" />
+            <Setter Property="OverridesDefaultStyle" Value="true" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Border x:Name="Border" 
+                                BorderThickness="1"
+                                Padding="2"
+                                SnapsToDevicePixels="true">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="SelectionStates">
+                                    <VisualState x:Name="Unselected" />
+                                    <VisualState x:Name="Selected" Storyboard="{StaticResource selectedItem}"/>
+                                    <VisualState x:Name="SelectedUnfocused" Storyboard="{StaticResource selectedItem}"/>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <ContentPresenter/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
         <Style TargetType="{x:Type ContentControl}" x:Key="mgcBtn">
-            <Setter Property="Padding" Value="30,10"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type ContentControl}" x:Name="cont">
-                        <Grid Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
+                        <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto"/>
                                 <RowDefinition Height="auto"/>
@@ -62,17 +113,14 @@
                                         <ColumnDefinition Width="1"/>
                                         <ColumnDefinition Width="2*"/>
                                     </Grid.ColumnDefinitions>
-                                    <ToggleButton Padding="30, 10" Name="tog">
+                                    <ToggleButton Name="tog">
                                         <ToggleButton.Template>
                                             <ControlTemplate TargetType="ToggleButton">
                                                 <Border Background="Transparent">
-                                                    <Border.RenderTransform>
-                                                        <RotateTransform x:Name="rotRect" Angle="0"/>
-                                                    </Border.RenderTransform>
                                                     <Polygon Points="12,12 12,26, 22,19" Fill="#4B86B1" RenderTransformOrigin="0.75,0.75"
                                                              HorizontalAlignment="Left" VerticalAlignment="Top">
                                                         <Polygon.RenderTransform>
-                                                            <RotateTransform x:Name="rotRect2" Angle="0" />
+                                                            <RotateTransform x:Name="polyRotate" Angle="0"/>
                                                         </Polygon.RenderTransform>
                                                         <Polygon.Effect>
                                                             <DropShadowEffect ShadowDepth="0.5" Direction="0" Color="Black" Opacity="1" BlurRadius="1"/>
@@ -83,14 +131,14 @@
                                                     <EventTrigger RoutedEvent="ToggleButton.Checked">
                                                         <BeginStoryboard>
                                                             <Storyboard>
-                                                                <DoubleAnimation Storyboard.TargetName="rotRect2" Storyboard.TargetProperty="Angle" From="0" To="90" Duration="0:0:0.5"/>
+                                                                <DoubleAnimation Storyboard.TargetName="polyRotate" Storyboard.TargetProperty="Angle" From="0" To="90" Duration="0:0:0.5"/>
                                                             </Storyboard>
                                                         </BeginStoryboard>
                                                     </EventTrigger>
                                                     <EventTrigger RoutedEvent="ToggleButton.Unchecked">
                                                         <BeginStoryboard>
                                                             <Storyboard>
-                                                                <DoubleAnimation Storyboard.TargetName="rotRect2" Storyboard.TargetProperty="Angle" From="90" To="0" Duration="0:0:0.5"/>
+                                                                <DoubleAnimation Storyboard.TargetName="polyRotate" Storyboard.TargetProperty="Angle" From="90" To="0" Duration="0:0:0.5"/>
                                                             </Storyboard>
                                                         </BeginStoryboard>
                                                     </EventTrigger>
@@ -106,7 +154,7 @@
                                             </LinearGradientBrush>
                                         </Rectangle.Fill>
                                     </Rectangle>
-                                    <Grid Grid.Column="2" MinWidth="100" Height="35" >
+                                    <Grid Grid.Column="2" Height="37">
                                         <Button Command="{Binding ElementName=ElBox, Path=Command}" 
                                                 CommandParameter="{Binding ElementName=lstBx, Path=SelectedItem}" 
                                                 Content="{TemplateBinding Content}" 
@@ -122,11 +170,10 @@
                                                                     </ContentPresenter.Effect>
                                                                 </ContentPresenter>
                                                             </Grid>
-                                                            <StackPanel Orientation="Horizontal" Margin="3,0">
-                                                                <TextBlock Text="{Binding ElementName=ElBox, Path=SubTitle}" Foreground="#D3D3D3" FontWeight="Normal" FontSize="8" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                                                            <StackPanel Orientation="Horizontal" Margin="4,0">
+                                                                <TextBlock Text="{Binding ElementName=ElBox, Path=SubTitle}" Foreground="#D3D3D3" FontWeight="Normal" FontSize="8"/>
                                                                 <TextBlock Text="{Binding ElementName=lstBx, Path=SelectedValue}" 
-                                                                           Foreground="Gold" FontWeight="Bold" FontSize="8" 
-                                                                           HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                                                                           Foreground="Gold" FontWeight="Bold" FontSize="8"/>
                                                             </StackPanel>
                                                         </StackPanel>
                                                     </Border>
@@ -136,10 +183,16 @@
                                     </Grid>
                                 </Grid>
                             </Border>
-                            <ListBox Canvas.ZIndex="0" Name="lstBx" BorderThickness="1" Height="0" Grid.Row="1" 
+                            <ListBox Canvas.ZIndex="0" Name="lstBx" BorderThickness="1" Height="0" Grid.Row="1" Style="{StaticResource listBoxStyle}"
                                      ItemsSource="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ItemsSource}" 
                                      DisplayMemberPath="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=DisplayMemberPath}" 
-                                     SelectedValuePath="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=DisplayMemberPath}"/>
+                                     SelectedValuePath="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=DisplayMemberPath}">
+                                <ListBox.Resources>
+                                    <Style TargetType="ScrollBar" BasedOn="{StaticResource ScrollBarStyle}" />
+                                    <Style TargetType="ListBoxItem" BasedOn="{StaticResource ListBoxItemStyle}" />
+
+                                </ListBox.Resources>
+                            </ListBox>
 
                             <Grid.Triggers>
                                 <EventTrigger RoutedEvent="ToggleButton.Checked">
@@ -172,61 +225,6 @@
             </Setter>
         </Style>
 
-        <Style x:Key="{x:Type ListBox}" TargetType="ListBox">
-            <Setter Property="Foreground" Value="#AEAEAE"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="ListBox">
-                        <Border Name="Border"
-                                BorderThickness="1"
-                                CornerRadius="4">
-                            <Border.BorderBrush>
-                                <SolidColorBrush Color="{StaticResource BorderMediumColor}" />
-                            </Border.BorderBrush>
-                            <Grid>
-                                <Border CornerRadius="4" BorderBrush="White" BorderThickness="0">
-                                    <Border.Background>
-                                        <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
-                                            <GradientStop Offset="0" Color="Gray"/>
-                                            <GradientStop Offset="0.08" Color="Black"/>
-                                            <GradientStop Offset="0.92" Color="Black"/>
-                                            <GradientStop Offset="1" Color="Gray"/>
-                                        </LinearGradientBrush>
-                                    </Border.Background>
-                                    <ScrollViewer Focusable="True">
-                                        <StackPanel IsItemsHost="True" />
-                                    </ScrollViewer>
-                                </Border>
-                            </Grid>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <Style x:Key="{x:Type ListBoxItem}" TargetType="ListBoxItem">
-            <Setter Property="SnapsToDevicePixels" Value="true" />
-            <Setter Property="OverridesDefaultStyle" Value="true" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="ListBoxItem">
-                        <Border x:Name="Border" 
-                                BorderThickness="1"
-                                Padding="2"
-                                SnapsToDevicePixels="true">
-                            <VisualStateManager.VisualStateGroups>
-                                <VisualStateGroup x:Name="SelectionStates">
-                                    <VisualState x:Name="Unselected" />
-                                    <VisualState x:Name="Selected" Storyboard="{StaticResource selectedItem}"/>
-                                    <VisualState x:Name="SelectedUnfocused" Storyboard="{StaticResource selectedItem}"/>
-                                </VisualStateGroup>
-                            </VisualStateManager.VisualStateGroups>
-                            <ContentPresenter/>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
     </Window.Resources>
     <Grid>
         <local:MagicalButton x:Name="ElBox" Content="Watch Now" SubTitle="Movie: "
