@@ -4,26 +4,23 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFTest"
+        xmlns:con="clr-namespace:WPFTest.Converters"
         mc:Ignorable="d"
         Title="Wnd_Random" Height="500" Width="500">
+    <Window.Resources>
+        <con:PropertyMultiValueConverter x:Key="PropertyMultiValueConverter"/>
+    </Window.Resources>
 
     <Grid>
-        <Border BorderThickness="8" CornerRadius="40" VerticalAlignment="Center" HorizontalAlignment="Center" Width="300" Height="300">
-            <Border.BorderBrush>
-                <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
-                    <GradientStop Offset="0" Color="Gray"/>
-                    <GradientStop Offset="1" Color="Black"/>
-                </LinearGradientBrush>
-            </Border.BorderBrush>
-                <Border.Background>
-                    <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
-                    <GradientStop Offset="1.0" Color="Black"/>
-                    <GradientStop Offset="0.99999" Color="Black"/>
-                    <GradientStop Offset="0.5" Color="Gray"/>
-                    <GradientStop Offset="0.00009" Color="Black"/>
-                    <GradientStop Offset="0.0" Color="Black"/>
-                    </LinearGradientBrush>
-                </Border.Background>
-        </Border>
+        <ListBox Name="lstBx" ItemsSource="{Binding Movies}" DisplayMemberPath="Title" VerticalAlignment="Top"></ListBox>
+        <TextBlock VerticalAlignment="Center" >
+            <TextBlock.Text>
+                <MultiBinding Mode="OneWay" Converter="{StaticResource PropertyMultiValueConverter}">
+                    <Binding ElementName="lstBx" Path="SelectedItem"/>
+                    <Binding ElementName="lstBx" Path="DisplayMemberPath" />
+                </MultiBinding>
+            </TextBlock.Text>
+
+        </TextBlock>
     </Grid>
 </Window>

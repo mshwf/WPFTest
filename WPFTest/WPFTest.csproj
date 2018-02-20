@@ -78,6 +78,7 @@
     <Compile Include="Collision.xaml.cs">
       <DependentUpon>Collision.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\PropertyMultiValueConverter.cs" />
     <Compile Include="Converters\StreamingConverter.cs" />
     <Compile Include="CustomBehavior.cs" />
     <Compile Include="CustomTemplateControls.xaml.cs">
