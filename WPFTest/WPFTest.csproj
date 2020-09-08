@@ -36,7 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Chart2DControl">
-      <HintPath>..\..\..\..\1Books\WPF\practical-wpf-charts-graphics-master\Examples_code\Chart2DControl\Chart2DControl\bin\Debug\Chart2DControl.dll</HintPath>
+      <HintPath>Libs\Chart2DControl.dll</HintPath>
     </Reference>
     <Reference Include="Dragablz, Version=0.0.3.193, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Dragablz.0.0.3.193\lib\net45\Dragablz.dll</HintPath>
@@ -47,11 +47,15 @@
     <Reference Include="MaterialDesignThemes.Wpf, Version=2.3.1.931, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignThemes.2.3.1-ci931\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Expression.Interactions, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\Microsoft.Expression.Interactions.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -175,8 +179,8 @@
     <Compile Include="Wnd_Styles.xaml.cs">
       <DependentUpon>Wnd_Styles.xaml</DependentUpon>
     </Compile>
-    <Compile Include="_DynamicWindow.xaml.cs">
-      <DependentUpon>_DynamicWindow.xaml</DependentUpon>
+    <Compile Include="DynamicWindow.xaml.cs">
+      <DependentUpon>DynamicWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="AnimatedButton.xaml">
       <SubType>Designer</SubType>
@@ -298,7 +302,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="_DynamicWindow.xaml">
+    <Page Include="DynamicWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
